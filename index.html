@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShinaBozor</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--s:#111;--s2:#1a1a1a;--bd:#2a2a2a;--ac:#e83a2f;--ac2:#ff6b35;--gd:#f5c842;--tx:#f0f0f0;--mu:#888;--gr:#2ecc71;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--tx);font-family:'Rajdhani',sans-serif;min-height:100vh;}
+header{background:var(--s);border-bottom:2px solid var(--ac);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:65px;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:3px;}
+.logo span{color:var(--ac);}
+.hbadge{background:var(--ac);color:#fff;padding:5px 14px;font-weight:700;font-size:.8rem;letter-spacing:1px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+.hero{background:linear-gradient(135deg,#0a0a0a,#1a0a08,#0a0a0a);padding:45px 1.5rem 30px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(232,58,47,.07),transparent 65%);animation:glow 4s ease-in-out infinite;}
+@keyframes glow{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,7vw,4rem);letter-spacing:4px;position:relative;}
+.hero h1 span{color:var(--ac);}
+.hero p{color:var(--mu);font-size:.95rem;margin-top:8px;position:relative;}
+.wrap{max-width:1180px;margin:0 auto;padding:1.5rem;display:grid;grid-template-columns:260px 1fr;gap:1.5rem;align-items:start;}
+@media(max-width:700px){.wrap{grid-template-columns:1fr;}}
+.panel{background:var(--s);border:1px solid var(--bd);border-top:3px solid var(--ac);padding:1.25rem;position:sticky;top:80px;}
+.ptitle{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--ac);margin-bottom:1.25rem;}
+.psec{margin-bottom:1.25rem;}
+.plabel{font-size:.7rem;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:.5rem;display:block;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.fb{background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:7px 3px;font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .18s;text-align:center;}
+.fb:hover{border-color:var(--ac);color:var(--ac);}
+.fb.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+.fb.wide{grid-column:1/-1;}
+.stog{display:flex;flex-direction:column;gap:5px;}
+.sopt{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--s2);border:1px solid var(--bd);cursor:pointer;transition:all .18s;}
+.sopt:hover{border-color:var(--ac);}
+.sopt.on{border-color:var(--ac);background:rgba(232,58,47,.1);}
+.sopt input{accent-color:var(--ac);}
+.sopt label{cursor:pointer;font-weight:600;font-size:.88rem;}
+.sprice{margin-left:auto;font-size:.75rem;color:var(--gd);font-weight:700;}
+.prange{display:flex;gap:5px;align-items:center;}
+.pinput{flex:1;background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:7px 5px;font-family:'Rajdhani',sans-serif;font-size:.85rem;outline:none;transition:border-color .18s;}
+.pinput:focus{border-color:var(--ac);}
+.okbtn{background:var(--ac);border:none;color:#fff;padding:7px 12px;font-family:'Bebas Neue',sans-serif;font-size:.95rem;cursor:pointer;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);}
+.okbtn:hover{background:var(--ac2);}
+.rbtn{width:100%;background:transparent;border:1px solid var(--bd);color:var(--mu);padding:9px;font-family:'Rajdhani',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .18s;margin-top:.6rem;letter-spacing:1px;}
+.rbtn:hover{border-color:var(--ac);color:var(--ac);}
+.rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+.rcnt{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;}
+.rcnt span{color:var(--ac);}
+.sortsel{background:var(--s);border:1px solid var(--bd);color:var(--tx);padding:7px 10px;font-family:'Rajdhani',sans-serif;font-size:.88rem;outline:none;cursor:pointer;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem;}
+.card{background:var(--s);border:1px solid var(--bd);padding:1.1rem;transition:all .22s;position:relative;overflow:hidden;animation:fi .35s ease forwards;}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--bd);transition:background .2s;}
+.card:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 6px 25px rgba(232,58,47,.13);}
+.card:hover::before{background:var(--ac);}
+.bbadge{display:inline-block;background:var(--s2);border:1px solid var(--bd);padding:2px 8px;font-size:.65rem;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:7px;}
+.tsvg{display:block;margin:7px auto;}
+.cname{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:2px;text-align:center;margin-bottom:2px;}
+.csize{text-align:center;color:var(--ac);font-size:.88rem;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
+.ctags{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px;justify-content:center;}
+.tag{background:var(--s2);border:1px solid var(--bd);padding:2px 6px;font-size:.65rem;font-weight:600;letter-spacing:1px;color:var(--mu);}
+.tag.su{border-color:#ff6b35;color:#ff6b35;}
+.tag.wi{border-color:#4fc3f7;color:#4fc3f7;}
+.tag.al{border-color:var(--gd);color:var(--gd);}
+.cprice{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;text-align:center;}
+.csvclabel{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px 0 8px;font-size:.75rem;font-weight:600;}
+.csvclabel.on{color:var(--gr);}
+.csvclabel.off{color:var(--mu);}
+.cacts{display:flex;gap:5px;}
+.addbtn{flex:1;background:var(--ac);border:none;color:#fff;padding:8px;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:1px;cursor:pointer;transition:all .18s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);}
+.addbtn:hover{background:var(--ac2);}
+.addbtn.done{background:var(--gr);}
+.svcbtn{background:var(--s2);border:1px solid var(--bd);color:var(--mu);padding:8px 7px;font-size:.68rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;letter-spacing:.3px;}
+.svcbtn:hover{border-color:var(--gd);color:var(--gd);}
+.svcbtn.on{border-color:var(--gr);color:var(--gr);background:rgba(46,204,113,.08);}
+.cfab{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--ac);border:none;color:#fff;width:56px;height:56px;font-size:1.35rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(232,58,47,.4);transition:all .2s;z-index:200;clip-path:polygon(9px 0%,100% 0%,calc(100% - 9px) 100%,0% 100%);}
+.cfab:hover{transform:scale(1.08);}
+.cbadge{position:fixed;bottom:calc(1.8rem + 32px);right:1.6rem;background:var(--gd);color:#000;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;z-index:201;}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:flex-end;justify-content:center;}
+.ov.open{display:flex;}
+@media(min-width:560px){.ov{align-items:center;}}
+.modal{background:var(--s);border:1px solid var(--bd);border-top:3px solid var(--ac);width:100%;max-width:490px;max-height:82vh;overflow-y:auto;padding:1.75rem;animation:su .28s ease;}
+@keyframes su{from{transform:translateY(35px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.mtitle{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;}
+.xbtn{background:none;border:1px solid var(--bd);color:var(--tx);width:30px;height:30px;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.xbtn:hover{border-color:var(--ac);color:var(--ac);}
+.ci{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--bd);}
+.ciinfo{flex:1;}
+.ciname{font-weight:700;font-size:.95rem;}
+.cisub{color:var(--mu);font-size:.8rem;margin-top:2px;}
+.ciprice{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--ac);white-space:nowrap;}
+.rmbtn{background:none;border:none;color:var(--mu);cursor:pointer;font-size:1.1rem;transition:color .18s;}
+.rmbtn:hover{color:var(--ac);}
+.ctotal{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0;margin-top:.9rem;border-top:2px solid var(--ac);}
+.ctlabel{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;}
+.ctprice{font-family:'Bebas Neue',sans-serif;font-size:1.85rem;color:var(--gd);}
+.obtn{width:100%;background:var(--ac);border:none;color:#fff;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;cursor:pointer;transition:all .2s;margin-top:.9rem;clip-path:polygon(9px 0%,100% 0%,calc(100% - 9px) 100%,0% 100%);}
+.obtn:hover{background:var(--ac2);}
+.ecart{text-align:center;color:var(--mu);padding:2rem 0;}
+.ecart div{font-size:2.3rem;margin-bottom:7px;}
+.succ{display:none;text-align:center;padding:2rem;}
+.succ.show{display:block;}
+.succ h2{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--gr);letter-spacing:3px;margin-bottom:7px;}
+.succ p{color:var(--mu);font-size:.9rem;line-height:1.6;}
+.nores{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;color:var(--mu);}
+.nores div{font-size:2.8rem;margin-bottom:10px;}
+.nores h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:2px;color:var(--bd);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SHINA<span>BOZOR</span></div>
+  <div class="hbadge">🇺🇿 O'zbekiston</div>
+</header>
+
+<div class="hero">
+  <h1>O'zingizga <span>Mos</span> Shinani Toping</h1>
+  <p>Razmer · Brend · Narx · Servis — hammasi bir joyda, uydan chiqmay</p>
+</div>
+
+<div class="wrap">
+  <aside class="panel">
+    <div class="ptitle">⚙ Filtrlar</div>
+
+    <div class="psec">
+      <span class="plabel">Razmer (R)</span>
+      <div class="fgrid" id="gSize">
+        <button class="fb wide on" onclick="setF('size','all',this,'gSize')">Barchasi</button>
+        <button class="fb" onclick="setF('size','R13',this,'gSize')">R13</button>
+        <button class="fb" onclick="setF('size','R14',this,'gSize')">R14</button>
+        <button class="fb" onclick="setF('size','R15',this,'gSize')">R15</button>
+        <button class="fb" onclick="setF('size','R16',this,'gSize')">R16</button>
+        <button class="fb" onclick="setF('size','R17',this,'gSize')">R17</button>
+        <button class="fb" onclick="setF('size','R18',this,'gSize')">R18</button>
+        <button class="fb" onclick="setF('size','R19',this,'gSize')">R19</button>
+      </div>
+    </div>
+
+    <div class="psec">
+      <span class="plabel">Brend</span>
+      <div class="fgrid" id="gBrand">
+        <button class="fb wide on" onclick="setF('brand','all',this,'gBrand')">Barchasi</button>
+        <button class="fb" onclick="setF('brand','Michelin',this,'gBrand')">Michelin</button>
+        <button class="fb" onclick="setF('brand','Bridgestone',this,'gBrand')">Bridgestone</button>
+        <button class="fb" onclick="setF('brand','Continental',this,'gBrand')">Continental</button>
+        <button class="fb" onclick="setF('brand','Pirelli',this,'gBrand')">Pirelli</button>
+        <button class="fb" onclick="setF('brand','Yokohama',this,'gBrand')">Yokohama</button>
+        <button class="fb" onclick="setF('brand','Hankook',this,'gBrand')">Hankook</button>
+      </div>
+    </div>
+
+    <div class="psec">
+      <span class="plabel">Mavsum</span>
+      <div class="fgrid" id="gSeason">
+        <button class="fb wide on" onclick="setF('season','all',this,'gSeason')">Barchasi</button>
+        <button class="fb" onclick="setF('season','Yozgi',this,'gSeason')">☀️ Yozgi</button>
+        <button class="fb" onclick="setF('season','Qishki',this,'gSeason')">❄️ Qishki</button>
+        <button class="fb" onclick="setF('season','Har fasl',this,'gSeason')">🌤 Har fasl</button>
+      </div>
+    </div>
+
+    <div class="psec">
+      <span class="plabel">O'rnatish Servis</span>
+      <div class="stog">
+        <div class="sopt on" id="sv-all" onclick="setSvc('all')"><input type="radio" name="sv" checked><label>Hammasi</label></div>
+        <div class="sopt" id="sv-yes" onclick="setSvc('yes')"><input type="radio" name="sv"><label>✅ Servis bilan</label><span class="sprice">+50,000</span></div>
+        <div class="sopt" id="sv-no" onclick="setSvc('no')"><input type="radio" name="sv"><label>📦 Faqat shina</label></div>
+      </div>
+    </div>
+
+    <div class="psec">
+      <span class="plabel">Narx (so'm)</span>
+      <div class="prange">
+        <input class="pinput" id="minP" type="number" placeholder="Min">
+        <input class="pinput" id="maxP" type="number" placeholder="Max">
+        <button class="okbtn" onclick="render()">OK</button>
+      </div>
+    </div>
+
+    <button class="rbtn" onclick="resetAll()">↺ FILTRLARNI TOZALASH</button>
+  </aside>
+
+  <main>
+    <div class="rhead">
+      <div class="rcnt">Topildi: <span id="cnt">0</span> ta</div>
+      <select class="sortsel" id="sortSel" onchange="render()">
+        <option value="def">Saralash: Standart</option>
+        <option value="pa">Narx: Arzondan</option>
+        <option value="pd">Narx: Qimmatdan</option>
+        <option value="br">Brend: A-Z</option>
+      </select>
+    </div>
+    <div class="pgrid" id="grid"></div>
+  </main>
+</div>
+
+<button class="cfab" onclick="openCart()">🛒</button>
+<div class="cbadge" id="badge">0</div>
+
+<div class="ov" id="ov">
+  <div class="modal">
+    <div id="cbody">
+      <div class="mhead">
+        <div class="mtitle">🛒 Savatcha</div>
+        <button class="xbtn" onclick="closeCart()">✕</button>
+      </div>
+      <div id="citems"></div>
+      <div id="cfoot"></div>
+    </div>
+    <div class="succ" id="succ">
+      <div>✅</div>
+      <h2>BUYURTMA QABUL!</h2>
+      <p>Tez orada siz bilan bog'lanamiz.<br>Xaridingiz uchun rahmat! 🙏</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA=[
+  {id:1,brand:'Michelin',model:'Primacy 4',size:'R16',season:'Yozgi',price:980000},
+  {id:2,brand:'Michelin',model:'Alpin 6',size:'R16',season:'Qishki',price:1100000},
+  {id:3,brand:'Michelin',model:'CrossClimate 2',size:'R17',season:'Har fasl',price:1250000},
+  {id:4,brand:'Michelin',model:'Latitude Sport 3',size:'R18',season:'Yozgi',price:1380000},
+  {id:5,brand:'Bridgestone',model:'Turanza T005',size:'R15',season:'Yozgi',price:850000},
+  {id:6,brand:'Bridgestone',model:'Blizzak LM005',size:'R17',season:'Qishki',price:1180000},
+  {id:7,brand:'Bridgestone',model:'Weather Control A005',size:'R18',season:'Har fasl',price:1350000},
+  {id:8,brand:'Bridgestone',model:'Ecopia EP150',size:'R14',season:'Yozgi',price:650000},
+  {id:9,brand:'Continental',model:'PremiumContact 7',size:'R16',season:'Yozgi',price:920000},
+  {id:10,brand:'Continental',model:'WinterContact TS870',size:'R15',season:'Qishki',price:990000},
+  {id:11,brand:'Continental',model:'AllSeasonContact',size:'R17',season:'Har fasl',price:1100000},
+  {id:12,brand:'Continental',model:'UltraContact UC6',size:'R13',season:'Yozgi',price:520000},
+  {id:13,brand:'Pirelli',model:'P Zero',size:'R19',season:'Yozgi',price:1680000},
+  {id:14,brand:'Pirelli',model:'Scorpion Winter',size:'R18',season:'Qishki',price:1450000},
+  {id:15,brand:'Pirelli',model:'Cinturato All Season',size:'R16',season:'Har fasl',price:1020000},
+  {id:16,brand:'Yokohama',model:'Advan Sport V105',size:'R17',season:'Yozgi',price:890000},
+  {id:17,brand:'Yokohama',model:'BluEarth Winter V906',size:'R15',season:'Qishki',price:780000},
+  {id:18,brand:'Yokohama',model:'BluEarth-4S AW21',size:'R16',season:'Har fasl',price:860000},
+  {id:19,brand:'Hankook',model:'Ventus Prime 4',size:'R14',season:'Yozgi',price:620000},
+  {id:20,brand:'Hankook',model:'Winter i*cept RS3',size:'R14',season:'Qishki',price:680000},
+  {id:21,brand:'Hankook',model:'Kinergy 4S2',size:'R15',season:'Har fasl',price:750000},
+  {id:22,brand:'Hankook',model:'Ventus S1 Evo3',size:'R19',season:'Yozgi',price:1280000},
+];
+
+const SVC=50000;
+let f={size:'all',brand:'all',season:'all',service:'all'};
+let cart=[];
+let svcOn={};
+
+const CLR={Michelin:'#e83a2f',Bridgestone:'#f5c842',Continental:'#4fc3f7',Pirelli:'#ff6b35',Yokohama:'#a78bfa',Hankook:'#2ecc71'};
+const fmt=n=>n.toLocaleString('uz-UZ')+" so'm";
+const tClass=s=>s==='Yozgi'?'su':s==='Qishki'?'wi':'al';
+
+function tsvg(c){
+  return `<svg viewBox="0 0 80 80" width="68" height="68" class="tsvg">
+    <circle cx="40" cy="40" r="34" fill="none" stroke="#1e1e1e" stroke-width="13"/>
+    <circle cx="40" cy="40" r="34" fill="none" stroke="${c}" stroke-width="2" stroke-dasharray="7 5" opacity=".55"/>
+    <circle cx="40" cy="40" r="14" fill="#111" stroke="#2a2a2a" stroke-width="1.5"/>
+    <circle cx="40" cy="40" r="4.5" fill="${c}"/>
+    <line x1="40" y1="28" x2="40" y2="52" stroke="#222" stroke-width="1.8"/>
+    <line x1="28" y1="40" x2="52" y2="40" stroke="#222" stroke-width="1.8"/>
+  </svg>`;
+}
+
+function setF(type,val,btn,gid){
+  f[type]=val;
+  document.getElementById(gid).querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+function setSvc(val){
+  f.service=val;
+  ['all','yes','no'].forEach(k=>{
+    const el=document.getElementById('sv-'+k);
+    el.classList.toggle('on',k===val);
+    el.querySelector('input').checked=(k===val);
+  });
+  render();
+}
+
+function resetAll(){
+  f={size:'all',brand:'all',season:'all',service:'all'};
+  document.getElementById('minP').value='';
+  document.getElementById('maxP').value='';
+  document.getElementById('sortSel').value='def';
+  ['gSize','gBrand','gSeason'].forEach(gid=>{
+    const g=document.getElementById(gid);
+    g.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+    g.querySelector('.wide').classList.add('on');
+  });
+  setSvc('all');
+  svcOn={};
+  render();
+}
+
+function render(){
+  const minP=parseInt(document.getElementById('minP').value)||0;
+  const maxP=parseInt(document.getElementById('maxP').value)||Infinity;
+  const sort=document.getElementById('sortSel').value;
+
+  let list=DATA.filter(p=>{
+    if(f.size!=='all'&&p.size!==f.size)return false;
+    if(f.brand!=='all'&&p.brand!==f.brand)return false;
+    if(f.season!=='all'&&p.season!==f.season)return false;
+    if(p.price<minP||p.price>maxP)return false;
+    return true;
+  });
+
+  if(f.service==='yes')list=list.filter(p=>svcOn[p.id]);
+  if(f.service==='no')list=list.filter(p=>!svcOn[p.id]);
+
+  if(sort==='pa')list.sort((a,b)=>a.price-b.price);
+  else if(sort==='pd')list.sort((a,b)=>b.price-a.price);
+  else if(sort==='br')list.sort((a,b)=>a.brand.localeCompare(b.brand));
+
+  document.getElementById('cnt').textContent=list.length;
+  const grid=document.getElementById('grid');
+
+  if(!list.length){
+    grid.innerHTML='<div class="nores"><div>🔍</div><h3>Mahsulot topilmadi</h3><p style="margin-top:8px;font-size:.88rem">Filtrlarni o\'zgartiring</p></div>';
+    return;
+  }
+
+  grid.innerHTML=list.map((p,i)=>{
+    const c=CLR[p.brand]||'#888';
+    const svc=!!svcOn[p.id];
+    const total=svc?p.price+SVC:p.price;
+    const inCart=cart.some(x=>x.id===p.id&&x.svc===svc);
+    return `<div class="card" style="animation-delay:${i*0.04}s">
+      <div class="bbadge">${p.brand}</div>
+      ${tsvg(c)}
+      <div class="cname">${p.model}</div>
+      <div class="csize">${p.size}</div>
+      <div class="ctags">
+        <span class="tag ${tClass(p.season)}">${p.season==='Yozgi'?'☀️':p.season==='Qishki'?'❄️':'🌤'} ${p.season}</span>
+        <span class="tag">${p.size}</span>
+      </div>
+      <div class="cprice">${fmt(total)}</div>
+      <div class="csvclabel ${svc?'on':'off'}">${svc?'✅ Servis kiritilgan':'📦 Faqat shina'}</div>
+      <div class="cacts">
+        <button class="svcbtn ${svc?'on':''}" onclick="toggleSvc(${p.id})">${svc?'✅ Servis':'+ Servis'}</button>
+        <button class="addbtn ${inCart?'done':''}" onclick="addCart(${p.id})">${inCart?'✓ QOSHILDI':'SAVAT'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleSvc(id){
+  svcOn[id]=!svcOn[id];
+  render();
+}
+
+function addCart(id){
+  const p=DATA.find(x=>x.id===id);
+  const svc=!!svcOn[id];
+  const idx=cart.findIndex(x=>x.id===id&&x.svc===svc);
+  if(idx>-1)cart.splice(idx,1);
+  else cart.push({...p,svc});
+  updateBadge();
+  render();
+}
+
+function updateBadge(){
+  const b=document.getElementById('badge');
+  b.textContent=cart.length;
+  b.style.display=cart.length?'flex':'none';
+}
+
+function openCart(){
+  document.getElementById('ov').classList.add('open');
+  document.getElementById('succ').classList.remove('show');
+  document.getElementById('cbody').style.display='block';
+  renderCart();
+}
+
+function closeCart(){
+  document.getElementById('ov').classList.remove('open');
+}
+
+function renderCart(){
+  const items=document.getElementById('citems');
+  const foot=document.getElementById('cfoot');
+  if(!cart.length){
+    items.innerHTML='<div class="ecart"><div>🛒</div><p>Savatchangiz bo\'sh</p></div>';
+    foot.innerHTML='';
+    return;
+  }
+  items.innerHTML=cart.map(c=>{
+    const total=c.svc?c.price+SVC:c.price;
+    return `<div class="ci">
+      ${tsvg(CLR[c.brand]||'#888').replace('width="68" height="68"','width="42" height="42"')}
+      <div class="ciinfo">
+        <div class="ciname">${c.brand} ${c.model}</div>
+        <div class="cisub">${c.size} · ${c.season}${c.svc?' · ✅ Servis':''}</div>
+      </div>
+      <div class="ciprice">${fmt(total)}</div>
+      <button class="rmbtn" onclick="removeCart(${c.id},${c.svc})">✕</button>
+    </div>`;
+  }).join('');
+  const total=cart.reduce((s,c)=>s+c.price+(c.svc?SVC:0),0);
+  foot.innerHTML=`
+    <div class="ctotal">
+      <div class="ctlabel">JAMI:</div>
+      <div class="ctprice">${fmt(total)}</div>
+    </div>
+    <button class="obtn" onclick="placeOrder()">📞 BUYURTMA BERISH</button>`;
+}
+
+function removeCart(id,svc){
+  cart=cart.filter(c=>!(c.id===id&&c.svc===svc));
+  updateBadge();
+  renderCart();
+  render();
+}
+
+function placeOrder(){
+  cart=[];
+  svcOn={};
+  updateBadge();
+  document.getElementById('cbody').style.display='none';
+  document.getElementById('succ').classList.add('show');
+  render();
+  setTimeout(closeCart,3500);
+}
+
+render();
+</script>
+</body>
+</html>
