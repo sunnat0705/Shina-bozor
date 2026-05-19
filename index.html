@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShinaCenter</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--s:#111;--s2:#1a1a1a;--bd:#2a2a2a;--ac:#e83a2f;--ac2:#ff6b35;--gd:#f5c842;--tx:#f0f0f0;--mu:#888;--gr:#2ecc71;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--tx);font-family:'Rajdhani',sans-serif;min-height:100vh;}
+header{background:var(--s);border-bottom:2px solid var(--ac);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:65px;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:3px;}
+.logo span{color:var(--ac);}
+.tglink{background:var(--ac);color:#fff;padding:6px 14px;font-weight:700;font-size:.8rem;letter-spacing:1px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);text-decoration:none;}
+
+/* HOME */
+.hero{background:linear-gradient(135deg,#0a0a0a,#1a0a08,#0a0a0a);padding:50px 1.5rem 40px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(232,58,47,.07),transparent 65%);animation:glow 4s ease-in-out infinite;}
+@keyframes glow{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,7vw,4rem);letter-spacing:4px;position:relative;}
+.hero h1 span{color:var(--ac);}
+.hero p{color:var(--mu);font-size:.95rem;margin-top:8px;position:relative;}
+.cats{max-width:900px;margin:0 auto;padding:3rem 1.5rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.cat-card{background:var(--s);border:1px solid var(--bd);padding:2.5rem 2rem;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.cat-card.eu::before{background:linear-gradient(90deg,#003399,#fff,#cc0000);}
+.cat-card.kr::before{background:linear-gradient(90deg,#003478,#fff,#cd2e3a);}
+.cat-card.cn::before{background:linear-gradient(90deg,#de2910,#ffde00,#de2910);}
+.cat-card:hover{transform:translateY(-5px);box-shadow:0 10px 35px rgba(232,58,47,.15);border-color:var(--ac);}
+.cat-flag{font-size:3.5rem;margin-bottom:1rem;display:block;}
+.cat-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;margin-bottom:.5rem;}
+.cat-card.eu .cat-title{color:#4fc3f7;}
+.cat-card.kr .cat-title{color:#a78bfa;}
+.cat-card.cn .cat-title{color:#f5c842;}
+.cat-brands{color:var(--mu);font-size:.85rem;line-height:1.7;}
+.cat-btn{display:inline-block;margin-top:1.25rem;background:var(--ac);color:#fff;padding:8px 24px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);}
+
+/* CATALOG */
+.catalog{display:none;}
+.cat-header{background:var(--s);border-bottom:1px solid var(--bd);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.back-btn{background:none;border:1px solid var(--bd);color:var(--tx);padding:7px 14px;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;cursor:pointer;transition:all .2s;}
+.back-btn:hover{border-color:var(--ac);color:var(--ac);}
+.cat-header-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;}
+
+/* FILTER AREA */
+.filter-area{background:var(--s);border-bottom:1px solid var(--bd);padding:1.25rem 1.5rem;}
+.filter-row{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:flex-start;}
+.fsec{flex:1;min-width:180px;}
+.plabel{font-size:.7rem;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:.5rem;display:block;}
+.fgrid{display:flex;flex-wrap:wrap;gap:4px;}
+.fb{background:var(--s2);border:1px solid var(--bd);color:var(--tx);padding:6px 10px;font-family:'Rajdhani',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.fb:hover{border-color:var(--ac);color:var(--ac);}
+.fb.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+.stog{display:flex;gap:5px;flex-wrap:wrap;}
+.sopt{display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--s2);border:1px solid var(--bd);cursor:pointer;transition:all .18s;}
+.sopt:hover{border-color:var(--ac);}
+.sopt.on{border-color:var(--ac);background:rgba(232,58,47,.1);}
+.sopt input{accent-color:var(--ac);}
+.sopt label{cursor:pointer;font-weight:600;font-size:.85rem;}
+.sprice{font-size:.72rem;color:var(--gd);font-weight:700;}
+.filter-btns{display:flex;gap:8px;align-items:flex-end;padding-top:1.5rem;}
+.rbtn{background:transparent;border:1px solid var(--bd);color:var(--mu);padding:7px 14px;font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .18s;letter-spacing:1px;white-space:nowrap;}
+.rbtn:hover{border-color:var(--ac);color:var(--ac);}
+
+/* RESULTS */
+.results-area{max-width:1180px;margin:0 auto;padding:1.5rem;}
+.rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem;}
+.rcnt{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;}
+.rcnt span{color:var(--ac);}
+.sortsel{background:var(--s);border:1px solid var(--bd);color:var(--tx);padding:7px 10px;font-family:'Rajdhani',sans-serif;font-size:.88rem;outline:none;cursor:pointer;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.9rem;}
+
+/* SELECT PROMPT */
+.select-prompt{grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--mu);}
+.select-prompt div{font-size:3rem;margin-bottom:12px;}
+.select-prompt h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;color:var(--bd);margin-bottom:8px;}
+.select-prompt p{font-size:.9rem;}
+
+.card{background:var(--s);border:1px solid var(--bd);padding:1rem;transition:all .22s;position:relative;overflow:hidden;animation:fi .3s ease forwards;}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--bd);transition:background .2s;}
+.card:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 6px 25px rgba(232,58,47,.13);}
+.card:hover::before{background:var(--ac);}
+.bbadge{display:inline-block;background:var(--s2);border:1px solid var(--bd);padding:2px 8px;font-size:.62rem;font-weight:700;letter-spacing:2px;color:var(--mu);text-transform:uppercase;margin-bottom:6px;}
+.tsvg{display:block;margin:6px auto;}
+.cname{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;text-align:center;margin-bottom:2px;}
+.csize{text-align:center;color:var(--ac);font-size:.85rem;font-weight:700;letter-spacing:1px;margin-bottom:7px;}
+.cprice{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;text-align:center;}
+.cprice.noprice{font-size:.85rem;color:var(--mu);font-family:'Rajdhani',sans-serif;}
+.csvclabel{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px 0 7px;font-size:.72rem;font-weight:600;}
+.csvclabel.on{color:var(--gr);}
+.csvclabel.off{color:var(--mu);}
+.cacts{display:flex;gap:4px;}
+.qty-row{display:flex;align-items:center;gap:5px;justify-content:center;margin-bottom:5px;}
+.qty-label{font-size:.7rem;color:var(--mu);font-weight:600;letter-spacing:1px;}
+.qty-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tx);width:24px;height:24px;font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.qty-btn:hover{border-color:var(--ac);color:var(--ac);}
+.qty-num{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--tx);min-width:22px;text-align:center;}
+.addbtn{flex:1;background:var(--ac);border:none;color:#fff;padding:7px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:1px;cursor:pointer;transition:all .18s;clip-path:polygon(5px 0%,100% 0%,calc(100% - 5px) 100%,0% 100%);}
+.addbtn:hover{background:var(--ac2);}
+.addbtn.done{background:var(--gr);}
+.svcbtn{background:var(--s2);border:1px solid var(--bd);color:var(--mu);padding:7px 6px;font-size:.65rem;font-weight:700;cursor:pointer;transition:all .18s;white-space:nowrap;}
+.svcbtn:hover{border-color:var(--gd);color:var(--gd);}
+.svcbtn.on{border-color:var(--gr);color:var(--gr);background:rgba(46,204,113,.08);}
+
+/* CART */
+.cfab{position:fixed;bottom:1.8rem;right:1.8rem;background:var(--ac);border:none;color:#fff;width:56px;height:56px;font-size:1.35rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(232,58,47,.4);transition:all .2s;z-index:200;clip-path:polygon(9px 0%,100% 0%,calc(100% - 9px) 100%,0% 100%);}
+.cfab:hover{transform:scale(1.08);}
+.cbadge{position:fixed;bottom:calc(1.8rem + 32px);right:1.6rem;background:var(--gd);color:#000;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;z-index:201;}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:flex-end;justify-content:center;}
+.ov.open{display:flex;}
+@media(min-width:560px){.ov{align-items:center;}}
+.modal{background:var(--s);border:1px solid var(--bd);border-top:3px solid var(--ac);width:100%;max-width:490px;max-height:82vh;overflow-y:auto;padding:1.75rem;animation:su .28s ease;}
+@keyframes su{from{transform:translateY(35px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;}
+.mtitle{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;}
+.xbtn{background:none;border:1px solid var(--bd);color:var(--tx);width:30px;height:30px;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.xbtn:hover{border-color:var(--ac);color:var(--ac);}
+.ci{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--bd);}
+.ciinfo{flex:1;}
+.ciname{font-weight:700;font-size:.95rem;}
+.cisub{color:var(--mu);font-size:.8rem;margin-top:2px;}
+.ciprice{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--ac);white-space:nowrap;}
+.rmbtn{background:none;border:none;color:var(--mu);cursor:pointer;font-size:1.1rem;transition:color .18s;}
+.rmbtn:hover{color:var(--ac);}
+.obtn{width:100%;background:var(--ac);border:none;color:#fff;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:3px;cursor:pointer;transition:all .2s;margin-top:.9rem;clip-path:polygon(9px 0%,100% 0%,calc(100% - 9px) 100%,0% 100%);}
+.obtn:hover{background:var(--ac2);}
+.ecart{text-align:center;color:var(--mu);padding:2rem 0;}
+.ecart div{font-size:2.3rem;margin-bottom:7px;}
+.succ{display:none;text-align:center;padding:2rem;}
+.succ.show{display:block;}
+.succ h2{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--gr);letter-spacing:3px;margin-bottom:7px;}
+.succ p{color:var(--mu);font-size:.9rem;line-height:1.6;}
+footer{background:var(--s);border-top:1px solid var(--bd);padding:1.25rem;text-align:center;margin-top:2rem;}
+footer a{color:var(--ac);text-decoration:none;font-weight:700;}
+footer p{color:var(--mu);font-size:.82rem;margin-top:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SHINA<span>CENTER</span></div>
+  <a href="https://t.me/shinacenter_uz" target="_blank" class="tglink">✈️ Telegram</a>
+</header>
+
+<!-- BOSH SAHIFA -->
+<div id="homePage">
+  <div class="hero">
+    <h1>O'zingizga <span>Mos</span> Shinani Toping</h1>
+    <p>Yevropa · Koreya · Xitoy — uydan chiqmay tanlang</p>
+  </div>
+  <div class="cats">
+    <div class="cat-card eu" onclick="openCat('eu')">
+      <span class="cat-flag">🇪🇺</span>
+      <div class="cat-title">Yevropa</div>
+      <div class="cat-brands">Michelin · Continental · Rikken<br>Pirelli · Yokohama · Bridgestone</div>
+      <div class="cat-btn">Ko'rish →</div>
+    </div>
+    <div class="cat-card kr" onclick="openCat('kr')">
+      <span class="cat-flag">🇰🇷</span>
+      <div class="cat-title">Koreya</div>
+      <div class="cat-brands">Kumho · Hankook · Nexen</div>
+      <div class="cat-btn">Ko'rish →</div>
+    </div>
+    <div class="cat-card cn" onclick="openCat('cn')">
+      <span class="cat-flag">🇨🇳</span>
+      <div class="cat-title">Xitoy</div>
+      <div class="cat-brands">Falkon · Kornet · All Season · Imperial<br>Mustang · Spektor · Camelot · Bearway</div>
+      <div class="cat-btn">Ko'rish →</div>
+    </div>
+  </div>
+  <footer>
+    <a href="https://t.me/shinacenter_uz" target="_blank">✈️ @shinacenter_uz</a>
+    <p>Savol va buyurtma uchun Telegramga yozing</p>
+  </footer>
+</div>
+
+<!-- KATALOG -->
+<div class="catalog" id="catalogPage">
+  <div class="cat-header">
+    <button class="back-btn" onclick="goHome()">← Orqaga</button>
+    <div class="cat-header-title" id="catTitle"></div>
+  </div>
+
+  <div class="filter-area">
+    <div class="filter-row">
+      <div class="fsec">
+        <span class="plabel">Brend tanlang</span>
+        <div class="fgrid" id="gBrand"></div>
+      </div>
+      <div class="fsec">
+        <span class="plabel">Razmer (R)</span>
+        <div class="fgrid" id="gSize">
+          <button class="fb on" onclick="setSize('all',this)">Barchasi</button>
+          <button class="fb" onclick="setSize('R12',this)">R12</button>
+          <button class="fb" onclick="setSize('R13',this)">R13</button>
+          <button class="fb" onclick="setSize('R14',this)">R14</button>
+          <button class="fb" onclick="setSize('R15',this)">R15</button>
+          <button class="fb" onclick="setSize('R16',this)">R16</button>
+          <button class="fb" onclick="setSize('R17',this)">R17</button>
+          <button class="fb" onclick="setSize('R18',this)">R18</button>
+          <button class="fb" onclick="setSize('R19',this)">R19</button>
+          <button class="fb" onclick="setSize('R20',this)">R20</button>
+          <button class="fb" onclick="setSize('R21',this)">R21</button>
+          <button class="fb" onclick="setSize('R22',this)">R22</button>
+          <button class="fb" onclick="setSize('R23',this)">R23</button>
+        </div>
+      </div>
+      <div class="fsec">
+        <span class="plabel">Servis</span>
+        <div class="stog">
+          <div class="sopt on" id="sv-all" onclick="setSvc('all')"><input type="radio" name="sv" checked><label>Hammasi</label></div>
+          <div class="sopt" id="sv-yes" onclick="setSvc('yes')"><input type="radio" name="sv"><label>✅ Servis bilan</label><span class="sprice">+50,000</span></div>
+          <div class="sopt" id="sv-no" onclick="setSvc('no')"><input type="radio" name="sv"><label>📦 Faqat shina</label></div>
+        </div>
+      </div>
+      <div class="filter-btns">
+        <button class="rbtn" onclick="resetFilters()">↺ Tozalash</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="results-area">
+    <div class="rhead">
+      <div class="rcnt">Topildi: <span id="cnt">0</span> ta</div>
+      <select class="sortsel" id="sortSel" onchange="render()">
+        <option value="def">Standart</option>
+        <option value="pa">Narx ↑</option>
+        <option value="pd">Narx ↓</option>
+        <option value="br">Brend A-Z</option>
+      </select>
+    </div>
+    <div class="pgrid" id="grid">
+      <div class="select-prompt">
+        <div>☝️</div>
+        <h3>Brend tanlang</h3>
+        <p>Yuqoridan brend va razmer tanlasangiz,<br>shinalar ko'rinadi</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="cfab" onclick="openCart()">🛒</button>
+<div class="cbadge" id="badge">0</div>
+
+<div class="ov" id="ov">
+  <div class="modal">
+    <div id="cbody">
+      <div class="mhead">
+        <div class="mtitle">🛒 Savatcha</div>
+        <button class="xbtn" onclick="closeCart()">✕</button>
+      </div>
+      <div id="citems"></div>
+      <div id="cfoot"></div>
+    </div>
+    <div class="succ" id="succ">
+      <div>✅</div>
+      <h2>BUYURTMA YUBORILDI!</h2>
+      <p>Telegram orqali tez orada bog'lanamiz.<br>Rahmat! 🙏</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const BRANDS={
+  eu:['Michelin','Continental','Rikken','Pirelli','Yokohama','Bridgestone'],
+  kr:['Kumho','Hankook','Nexen'],
+  cn:['Falkon','Kornet','All Season','Imperial','Mustang','Spektor','Camelot','Bearway']
+};
+
+const SIZES=[
+  {label:'175/70 R12',r:'R12'},
+  {label:'165/70 R13',r:'R13'},{label:'175/70 R13',r:'R13'},{label:'165 R13C',r:'R13'},
+  {label:'185/65 R14',r:'R14'},{label:'175/70 R14C',r:'R14'},{label:'175 R14C',r:'R14'},{label:'185 R14C',r:'R14'},{label:'195 R14C',r:'R14'},
+  {label:'195/55 R15',r:'R15'},{label:'195/60 R15',r:'R15'},{label:'195/65 R15',r:'R15'},{label:'205/65 R15',r:'R15'},{label:'225/70 R15C',r:'R15'},
+  {label:'205/55 R16',r:'R16'},{label:'205/60 R16',r:'R16'},{label:'215/60 R16',r:'R16'},{label:'215/65 R16',r:'R16'},{label:'195/75 R16C',r:'R16'},{label:'215/75 R16C',r:'R16'},{label:'225/75 R16C',r:'R16'},{label:'235/65 R16C',r:'R16'},
+  {label:'215/55 R17',r:'R17'},{label:'225/55 R17',r:'R17'},{label:'225/60 R17',r:'R17'},{label:'235/60 R17',r:'R17'},{label:'265/65 R17',r:'R17'},
+  {label:'225/55 R18',r:'R18'},{label:'235/50 R18',r:'R18'},{label:'235/55 R18',r:'R18'},{label:'235/60 R18',r:'R18'},{label:'245/60 R18',r:'R18'},{label:'265/60 R18',r:'R18'},
+  {label:'235/55 R19',r:'R19'},{label:'245/45 R19',r:'R19'},{label:'245/40 R19',r:'R19'},{label:'255/50 R19',r:'R19'},{label:'245/55 R19',r:'R19'},{label:'255/45 R19',r:'R19'},{label:'275/35 R19',r:'R19'},
+  {label:'255/45 R20',r:'R20'},{label:'255/50 R20',r:'R20'},{label:'255/55 R20',r:'R20'},{label:'265/50 R20',r:'R20'},{label:'275/60 R20',r:'R20'},{label:'285/50 R20',r:'R20'},
+  {label:'265/45 R21',r:'R21'},{label:'275/45 R21',r:'R21'},{label:'275/50 R21',r:'R21'},
+  {label:'285/45 R22',r:'R22'},{label:'285/40 R22',r:'R22'},{label:'295/40 R22',r:'R22'},{label:'325/35 R22',r:'R22'},
+  {label:'285/40 R23',r:'R23'},{label:'325/35 R23',r:'R23'}
+];
+
+const CLR={Michelin:'#e83a2f',Continental:'#4fc3f7',Rikken:'#ff9500',Pirelli:'#ff6b35',Yokohama:'#a78bfa',Bridgestone:'#f5c842',Kumho:'#2ecc71',Hankook:'#1abc9c',Nexen:'#27ae60',Falkon:'#e74c3c',Kornet:'#e67e22','All Season':'#3498db',Imperial:'#9b59b6',Mustang:'#e83a2f',Spektor:'#00bcd4',Camelot:'#ff9800',Bearway:'#8bc34a'};
+const CAT={eu:'🇪🇺 Yevropa',kr:'🇰🇷 Koreya',cn:'🇨🇳 Xitoy'};
+const SVC=50000;
+
+let currentCat=null;
+let f={brand:'all',size:'all',service:'all'};
+let cart=[],svcOn={},qtyMap={};
+
+function tsvg(c){return `<svg viewBox="0 0 80 80" width="60" height="60" class="tsvg"><circle cx="40" cy="40" r="34" fill="none" stroke="#1e1e1e" stroke-width="13"/><circle cx="40" cy="40" r="34" fill="none" stroke="${c}" stroke-width="2" stroke-dasharray="7 5" opacity=".55"/><circle cx="40" cy="40" r="14" fill="#111" stroke="#2a2a2a" stroke-width="1.5"/><circle cx="40" cy="40" r="4.5" fill="${c}"/><line x1="40" y1="28" x2="40" y2="52" stroke="#222" stroke-width="1.8"/><line x1="28" y1="40" x2="52" y2="40" stroke="#222" stroke-width="1.8"/></svg>`;}
+
+function openCat(cat){
+  currentCat=cat;
+  f={brand:'all',size:'all',service:'all'};
+  svcOn={};
+  document.getElementById('homePage').style.display='none';
+  document.getElementById('catalogPage').style.display='block';
+  document.getElementById('catTitle').textContent=CAT[cat];
+  // Brand buttons
+  const gBrand=document.getElementById('gBrand');
+  gBrand.innerHTML=`<button class="fb on" onclick="setBrand('all',this)">Barchasi</button>`;
+  BRANDS[cat].forEach(b=>{
+    const btn=document.createElement('button');
+    btn.className='fb';btn.textContent=b;
+    btn.onclick=function(){setBrand(b,this);};
+    gBrand.appendChild(btn);
+  });
+  // Reset size buttons
+  document.getElementById('gSize').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('gSize').querySelector('.fb').classList.add('on');
+  setSvc('all');
+  showPrompt();
+  window.scrollTo(0,0);
+}
+
+function goHome(){
+  document.getElementById('homePage').style.display='block';
+  document.getElementById('catalogPage').style.display='none';
+  window.scrollTo(0,0);
+}
+
+function setBrand(val,btn){
+  f.brand=val;
+  document.getElementById('gBrand').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+function setSize(val,btn){
+  f.size=val;
+  document.getElementById('gSize').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+function setSvc(val){
+  f.service=val;
+  ['all','yes','no'].forEach(k=>{
+    const el=document.getElementById('sv-'+k);
+    el.classList.toggle('on',k===val);
+    el.querySelector('input').checked=(k===val);
+  });
+  if(f.brand!=='all'||f.size!=='all') render();
+}
+
+function resetFilters(){
+  f={brand:'all',size:'all',service:'all'};
+  document.getElementById('gBrand').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('gBrand').querySelector('.fb').classList.add('on');
+  document.getElementById('gSize').querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('gSize').querySelector('.fb').classList.add('on');
+  document.getElementById('sortSel').value='def';
+  setSvc('all');
+  showPrompt();
+}
+
+function showPrompt(){
+  document.getElementById('cnt').textContent='0';
+  document.getElementById('grid').innerHTML=`<div class="select-prompt"><div>☝️</div><h3>Brend tanlang</h3><p>Yuqoridan brend yoki razmer tanlasangiz,<br>shinalar ko'rinadi</p></div>`;
+}
+
+function getFilteredSizes(){
+  return f.size==='all' ? SIZES : SIZES.filter(s=>s.r===f.size);
+}
+
+function render(){
+  // Agar hech narsa tanlanmagan bo'lsa prompt ko'rsat
+  if(f.brand==='all' && f.size==='all'){showPrompt();return;}
+
+  const sort=document.getElementById('sortSel').value;
+  const brands=f.brand==='all' ? BRANDS[currentCat] : [f.brand];
+  const sizes=getFilteredSizes();
+
+  // Karta ma'lumotlari generatsiya
+  let list=[];
+  let id=1;
+  brands.forEach(brand=>{
+    sizes.forEach(s=>{
+      list.push({id:id++,brand,size:s.label,rsize:s.r,price:0});
+    });
+  });
+
+  if(f.service==='yes') list=list.filter(p=>svcOn[p.brand+p.size]);
+  if(f.service==='no') list=list.filter(p=>!svcOn[p.brand+p.size]);
+  if(sort==='br') list.sort((a,b)=>a.brand.localeCompare(b.brand));
+
+  document.getElementById('cnt').textContent=list.length;
+  const grid=document.getElementById('grid');
+
+  if(!list.length){
+    grid.innerHTML='<div class="select-prompt"><div>🔍</div><h3>Topilmadi</h3></div>';
+    return;
+  }
+
+  // Faqat ko'rinadigan kartalarni render qil (virtual scroll o'rniga limit)
+  const shown=list.slice(0,100);
+  grid.innerHTML=shown.map((p,i)=>{
+    const c=CLR[p.brand]||'#888';
+    const key=p.brand+p.size;
+    const svc=!!svcOn[key];
+    const inCart=cart.some(x=>x.key===key&&x.svc===svc);
+    return `<div class="card" style="animation-delay:${Math.min(i,20)*0.03}s">
+      <div class="bbadge">${p.brand}</div>
+      ${tsvg(c)}
+      <div class="csize">${p.size}</div>
+      <div class="cprice noprice">📞 Narx so'raladi</div>
+      <div class="csvclabel ${svc?'on':'off'}">${svc?'✅ Servis bilan':'📦 Faqat shina'}</div>
+      <div class="qty-row">
+        <span class="qty-label">SONI:</span>
+        <button class="qty-btn" onclick="changeQty('${key}',-1)">−</button>
+        <span class="qty-num" id="qty-${key}">${qtyMap[key]||1}</span>
+        <button class="qty-btn" onclick="changeQty('${key}',1)">+</button>
+        <span class="qty-label">ta</span>
+      </div>
+      <div class="cacts">
+        <button class="svcbtn ${svc?'on':''}" onclick="toggleSvc('${key}')">${svc?'✅':'+ Servis'}</button>
+        <button class="addbtn ${inCart?'done':''}" onclick="addCart('${key}','${p.brand}','${p.size}','${p.rsize}')">${inCart?'✓':'SAVAT'}</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  if(list.length>100){
+    grid.innerHTML+=`<div class="select-prompt" style="grid-column:1/-1;padding:1.5rem"><p style="color:var(--mu)">Ko'proq ko'rish uchun brendni aniqlashtiring</p></div>`;
+  }
+}
+
+function changeQty(key,delta){
+  if(!qtyMap[key]) qtyMap[key]=1;
+  qtyMap[key]=Math.max(1,Math.min(20,qtyMap[key]+delta));
+  const el=document.getElementById('qty-'+key);
+  if(el) el.textContent=qtyMap[key];
+}
+
+function toggleSvc(key){
+  svcOn[key]=!svcOn[key];
+  render();
+}
+
+function addCart(key,brand,size,rsize){
+  const svc=!!svcOn[key];
+  const qty=qtyMap[key]||1;
+  const idx=cart.findIndex(x=>x.key===key&&x.svc===svc&&x.cat===currentCat);
+  if(idx>-1) cart.splice(idx,1);
+  else cart.push({key,brand,size,rsize,svc,cat:currentCat,price:0,qty});
+  updateBadge();render();
+}
+
+function updateBadge(){
+  const b=document.getElementById('badge');
+  b.textContent=cart.length;
+  b.style.display=cart.length?'flex':'none';
+}
+
+function openCart(){
+  document.getElementById('ov').classList.add('open');
+  document.getElementById('succ').classList.remove('show');
+  document.getElementById('cbody').style.display='block';
+  renderCart();
+}
+function closeCart(){document.getElementById('ov').classList.remove('open');}
+
+function renderCart(){
+  const items=document.getElementById('citems');
+  const foot=document.getElementById('cfoot');
+  if(!cart.length){items.innerHTML='<div class="ecart"><div>🛒</div><p>Savatchangiz bo\'sh</p></div>';foot.innerHTML='';return;}
+  const catName={eu:'🇪🇺',kr:'🇰🇷',cn:'🇨🇳'};
+  items.innerHTML=cart.map(c=>`<div class="ci">
+    ${tsvg(CLR[c.brand]||'#888').replace('width="60" height="60"','width="38" height="38"')}
+    <div class="ciinfo">
+      <div class="ciname">${catName[c.cat]} ${c.brand}</div>
+      <div class="cisub">${c.size} · ${c.qty||1} ta${c.svc?' · ✅ Servis':''}</div>
+    </div>
+    <div class="ciprice">So'raladi</div>
+    <button class="rmbtn" onclick="removeCart('${c.key}','${c.cat}',${c.svc})">✕</button>
+  </div>`).join('');
+  foot.innerHTML=`<button class="obtn" onclick="placeOrder()">✈️ TELEGRAMGA BUYURTMA</button>`;
+}
+
+function removeCart(key,cat,svc){
+  cart=cart.filter(c=>!(c.key===key&&c.cat===cat&&c.svc===svc));
+  updateBadge();renderCart();render();
+}
+
+function placeOrder(){
+  if(!cart.length)return;
+  const catName={eu:'🇪🇺 Yevropa',kr:'🇰🇷 Koreya',cn:'🇨🇳 Xitoy'};
+  let msg="🚗 Yangi buyurtma!\n\n";
+  cart.forEach(c=>{
+    msg+=`▪️ ${catName[c.cat]} | ${c.brand} — ${c.size} · ${c.qty||1} ta\n`;
+    if(c.svc) msg+=`   🔧 O'rnatish servis bilan\n`;
+    msg+='\n';
+  });
+  msg+="📞 Narx va mavjudligini tasdiqlang!";
+  window.open(`https://t.me/shinacenter_uz?text=${encodeURIComponent(msg)}`,'_blank');
+  cart=[];svcOn={};updateBadge();
+  document.getElementById('cbody').style.display='none';
+  document.getElementById('succ').classList.add('show');
+  setTimeout(closeCart,3500);
+}
+</script>
+</body>
+</html>
